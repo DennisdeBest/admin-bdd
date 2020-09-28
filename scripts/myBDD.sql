@@ -1,0 +1,10 @@
+CREATE SCHEMA IF NOT EXISTS teams;
+USE teams;
+DROP TABLE IF EXISTS games;
+CREATE TABLE games ( uuid VARCHAR(38), match_date DATE, victory BOOLEAN, observations TEXT);
+DROP TABLE IF EXISTS players;
+CREATE TABLE players ( uuid VARCHAR(38), firstname VARCHAR(255), lastname VARCHAR(255), start_date DATE);
+CREATE USER IF NOT EXISTS 'manager'@'localhost' IDENTIFIED BY 'manager_password';
+GRANT ALL PRIVILEGES ON teams.games TO 'manager'@'localhost';
+CREATE USER IF NOT EXISTS 'recruiter'@'localhost' IDENTIFIED BY 'recruiter_password';
+GRANT INSERT,SELECT ON teams.players TO 'recruiter'@'localhost';

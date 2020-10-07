@@ -12,6 +12,7 @@ Yann LE COZ - Bordeaux Ynov Campus
   - [TP4](#TP4)
     - [Part 1](#Part-1)
     - [Part 2](#Part-2)
+    - [Part 3](#Part-3)
 
 ## 05-10
 
@@ -36,15 +37,37 @@ Vous pouvez accéder à mon image Dockerfile en cliquant [ici](https://hub.docke
 
 - **Utilisation de l'outil crontab**
   - **Installation de l'éditeur Vim**
-    ```bach
-    # apt-get install vi -yq
+    ```bash
+    apt-get install vi -yq
     ```
   - **Édition du crontab**
     ```zsh
     0 17 * * 1 mysqldump -u root -p password --all-databases | gzip -9 -c > /backups/backup_"$(date +%Y-%m-%d)".sql.gz
     ```
 - **Démarrage du service**
-  ```bach
-  # service cron start
+
+  ```bash
+  service cron start
   [ ok ] Starting periodic command scheduler: cron.
+  ```
+
+#### Part 3
+
+- **Création du fichier `/etc/logrotate.d/tp4`**
+
+  ```bash
+  vim /etc/logrotate.d/tp4
+  ```
+- **Ajout des lignes suivantes :**
+  ```bash
+  /backups/all_databases{
+    rotate 5
+    daily
+    compress
+    compresscmd bzip
+    compressext .bz2
+    postrotate
+      mysqldump -u root -p password --all-databases | gzip -9 -c > all_
+    endscript
+  }
   ```

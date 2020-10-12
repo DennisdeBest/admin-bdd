@@ -71,3 +71,10 @@ Vous pouvez accéder à mon image Dockerfile en cliquant [ici](https://hub.docke
     endscript
   }
   ```
+
+  ## 12-10
+  ### TP5
+  
+  Vous pouvez accéder au fichier dump en cliquant [ici](https://github.com/ianlcz/admin-bdd/blob/master/12-10/TP5/backups/dump_file).
+
+  De plus, j'ai dû modifier dans celui-ci `utf8mb4_0900_ai_ci` par `CHARSET=utf8 COLLATE=utf8_general_ci;`.

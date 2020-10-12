@@ -72,9 +72,12 @@ Vous pouvez accéder à mon image Dockerfile en cliquant [ici](https://hub.docke
   }
   ```
 
-  ## 12-10
-  ### TP5
-  
-  Vous pouvez accéder au fichier dump en cliquant [ici](https://github.com/ianlcz/admin-bdd/blob/master/12-10/TP5/backups/dump_file).
+## 12-10
+### TP5
 
-  De plus, j'ai dû modifier dans celui-ci `utf8mb4_0900_ai_ci` par `CHARSET=utf8 COLLATE=utf8_general_ci;`.
+Vous pouvez accéder au fichier dump en cliquant [ici](https://github.com/ianlcz/admin-bdd/blob/master/12-10/TP5/backups/dump_file).
+
+De plus, j'ai dû modifier dans celui-ci `utf8mb4_0900_ai_ci` par `CHARSET=utf8 COLLATE=utf8_general_ci;`.
+
+### TP6
+Vous pouvez au contenu de mon travail pour le TP6 en cliquant [ici](https://github.com/ianlcz/admin-bdd/blob/master/12-10/TP6/).

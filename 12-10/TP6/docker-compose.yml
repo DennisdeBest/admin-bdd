@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  maria-master-tp6:
+    image: mariadb:10.5
+    restart: on-failure
+    ports:
+      - 3306
+    networks:
+      - my-network
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./maria-master:/var/lib/mysql
+      - ./backups:/backups
+      - ./config/master.cnf:/etc/mysql/mariadb.conf.d/master.cnf
+      - ./scripts:/scripts
+
+  maria-slave-tp6:
+    image: mariadb:10.5
+    restart: on-failure
+    ports:
+      - 3306
+    networks:
+      - my-network
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./maria-slave:/var/lib/mysql
+      - ./backups:/backups
+      - ./config/master.cnf:/etc/mysql/mariadb.conf.d/master.cnf
+      - ./scripts:/scripts
+
+networks:
+  my-network:

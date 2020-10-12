@@ -1,0 +1,8 @@
+CHANGE MASTER TO
+  MASTER_HOST='maria-master-tp6',
+  MASTER_USER='replication',
+  MASTER_PASSWORD='replicant_password',
+  MASTER_PORT=3306,
+  MASTER_LOG_FILE='master1-bin.000001',
+  MASTER_LOG_POS=330,
+  MASTER_CONNECT_RETRY=10;

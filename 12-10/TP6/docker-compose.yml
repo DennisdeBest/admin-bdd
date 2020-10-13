@@ -28,7 +28,7 @@ services:
     volumes:
       - ./maria-slave:/var/lib/mysql
       - ./backups:/backups
-      - ./config/master.cnf:/etc/mysql/mariadb.conf.d/master.cnf
+      - ./config/slave.cnf:/etc/mysql/mariadb.conf.d/slave.cnf
       - ./scripts:/scripts
 
 networks:

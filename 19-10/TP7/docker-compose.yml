@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  maria-1-TP7:
+    image: mariadb:latest
+    hostname: maria-1-TP7
+    ports:
+      - 3306
+      - 4444
+      - 4567
+      - 4568
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    command: --wsrep-new-cluster
+    volumes:
+      - ./maria-1-TP7:/var/lib/mysql
+      - ./config/node1.cnf:/etc/mysql/mariadb.conf.d/node1.cnf
+
+  maria-2-TP7:
+    image: mariadb:latest
+    hostname: maria-2-TP7
+    links:
+      - maria-1-TP7
+    ports:
+      - 3306
+      - 4444
+      - 4567
+      - 4568
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./maria-2-TP7:/var/lib/mysql
+      - ./config/node2.cnf:/etc/mysql/mariadb.conf.d/node2.cnf
+
+  maria-3-TP7:
+    image: mariadb:latest
+    hostname: maria-3-TP7
+    links:
+      - maria-1-TP7
+    ports:
+      - 3306
+      - 4444
+      - 4567
+      - 4568
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./maria-3-TP7:/var/lib/mysql
+      - ./config/node3.cnf:/etc/mysql/mariadb.conf.d/node3.cnf

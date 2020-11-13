@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mariadb:
+    image: mariadb:latest
+    hostname: mariadb
+    ports:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./mariadb:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: monitoring_prometheus
+    hostname: prometheus
+    restart: unless-stopped
+    links:
+      - mysql-exporter:mysql-exporter
+    depends_on:
+      - mysql-exporter
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  mysql-exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: monitoring_mysql_exporter
+    hostname: mysql-exporter
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+    ports:
+      - 9104:9104
+    environment:
+      DATA_SOURCE_NAME: "root:password@(mariadb:3306)/test"
+    
+  grafana:
+    image: grafana/grafana:latest
+    container_name: monitoring_grafana
+    restart: unless-stopped
+    links:
+      - prometheus:prometheus
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=password
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_DOMAIN=localhost
